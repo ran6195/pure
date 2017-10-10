@@ -11,5 +11,8 @@
     "url": "C:/Users/37504667/Documents/node_projects/pure/.git/"
   },
   "author": "Francesco Corsanello <francesco.corsanello@telecmoitalia.it>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-purestorage": "^1.1.0"
+  }
 }
