@@ -1,0 +1,15 @@
+{
+  "name": "pure",
+  "version": "0.1.0",
+  "description": "Un progetto per recuperare dati dai PureStorage",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "C:/Users/37504667/Documents/node_projects/pure/.git/"
+  },
+  "author": "Francesco Corsanello <francesco.corsanello@telecmoitalia.it>",
+  "license": "MIT"
+}
