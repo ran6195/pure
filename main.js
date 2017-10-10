@@ -25,6 +25,7 @@ const con = require('./node_modules/node-purestorage/lib/session.js')
 
 //Volumi
 let volumi
+let hosts
 
 
 //Ciclo su tutti i box
@@ -36,29 +37,42 @@ for (let i = 0; i < boxes.length; i++) {
     //Creo l'oggetto  (Promise) relatico alla connessione
     let B = new PureArray(C);
 
+    let writer = (nome, box, estensione) => {
+        return new fs.createWriteStream(nome + '_' + box + '.' + estensione, defaults)
+    }
+
 
     C.authSession(boxes[0].token).then(() => {
-        //Salvo le informazioni di tutti i volumi dello storage
-        let writer_json = new fs.createWriteStream('volumi_' + boxes[i].nome + '.json', defaults)
-        let writer_csv = new fs.createWriteStream('volumi_' + boxes[i].nome + '.csv', defaults)
-        B.Volumes.list().then((data) => {
-            writer_json.write(JSON.stringify(volumi = data));
-            //Prendo le chiavi degli oggetti contenuti nell'array
-            let o = volumi[0]
-            let k = Object.keys(o);
-            let prima_riga = k.join(',')
-            writer_csv.write(prima_riga + '\r\n');
-            for (let j = 0; j < volumi.length; j++) {
-                let v = Object.values(volumi[j])
-                v[v.length - 1] = v[v.length - 1] / (Math.pow(2, 30))  //Dimensione in GB
 
-                writer_csv.write(v.join(',') + '\r\n')
+       
+
+        //Volumi
+        B.Volumes.list().then((data) => {
+            let w_csv = writer('volumi', boxes[i].nome, 'csv')
+            let w_json = writer('volumi', boxes[i].nome, 'json')
+            w_json.write(JSON.stringify(volumi = data));
+            w_json = null
+            w_csv.write(Object.keys(volumi[0]).join(',') + '\r\n');
+            for (let j = 0; j < volumi.length; j++) {
+
+                volumi[j].size = volumi[j].size / Math.pow(2, 30) //Se lo faccio qui funziona anche se la chiave cambia di posizione
+
+                w_csv.write(Object.values(volumi[j]).join(',') + '\r\n')
             }
+
+            w_json = null
+
         }, err => console.log(err))
+
+
+        //Hosts
+        B.Hosts.list().then((hosts = data) => {
+            let w_json = writer('hosts', boxes[i].nome, 'json');
+            w_json.write(JSON.stringify(hosts))
+            w_json = null
+        }, err => console.log(err))
+
 
     }, (err) => console.log(err))
 
 }
-
-
-
