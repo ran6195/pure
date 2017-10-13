@@ -79,10 +79,9 @@ for (let i = 0; i < boxes.length; i++) {
             }, err => console.log(err))
 
             B[i].Array.capacity().then((data) => {
-                console.log(boxes[i].nome, 'occupato --> ',
-                    (data[0].volumes / Math.pow(2, 40)).toFixed(2))
-                console.log(boxes[i].nome, 'totale --> ',
-                    (data[0].capacity / Math.pow(2, 40)).toFixed(2))
+
+                console.log(boxes[i].nome, ',', (data[0].capacity / Math.pow(2, 40)).toFixed(2), ',' , (data[0].volumes / Math.pow(2, 40)).toFixed(2))
+
             }, (err) => console.log(err))
 
         }, err => console.log(err))
