@@ -19,7 +19,7 @@ let Boxes = [{
     token: "527c72f4-7cbe-7747-191b-02e9ba93aafb",
     api_version: "1.8"
   },
-  {
+  /* {
     nome: "PUREBO04",
     etichetta: "2020002433",
     indirizzo: "10.22.250.64",
@@ -39,7 +39,7 @@ let Boxes = [{
     indirizzo: "10.22.250.70",
     token: "732cfb48-7490-cde9-f8a8-a1c6929cf58c",
     api_version: "1.8"
-  }
+  } */
 
 ];
 

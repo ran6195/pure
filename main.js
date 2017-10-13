@@ -82,9 +82,19 @@ for (let i = 0; i < boxes.length; i++) {
 
             B[i].Array.capacity().then((data) => {
 
-                console.log(boxes[i].nome, ',', (data[0].capacity / Math.pow(2, 40)).toFixed(2), ',' , (data[0].volumes / Math.pow(2, 40)).toFixed(2))
+                console.log(boxes[i].nome, ',', (data[0].capacity / Math.pow(2, 40)).toFixed(2), ',', (data[0].volumes / Math.pow(2, 40)).toFixed(2))
 
             }, (err) => console.log(err))
+
+
+            B[i].Hardware.drives().then((data) => {
+                data = data.filter(e => e.status === 'healthy' && e.type !== 'NVRAM' )
+                let w_drive = writer('drive',boxes[i].nome,'json')
+                w_drive.write(JSON.stringify(data))
+                w_drive = null
+                
+                console.log(boxes[i].nome , data.length ), err => console.log(err)
+            })
 
         }, err => console.log(err))
 
