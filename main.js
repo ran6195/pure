@@ -26,6 +26,8 @@ const con = require('./node_modules/node-purestorage/lib/session.js')
 //Volumi
 let volumi
 let hosts
+
+// Creo due array per tenere un riferimento alle funzioni asincrone durente il loop suli box
 let C = []
 let B = []
 
