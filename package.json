@@ -4,7 +4,7 @@
   "description": "Un progetto per recuperare dati dai PureStorage",
   "main": "main.js",
   "scripts": {
-    "start": "node ." , 
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,4 +16,5 @@
   "dependencies": {
     "node-purestorage": "^1.1.0"
   }
+
 }
